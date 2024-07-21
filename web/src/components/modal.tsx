@@ -1,17 +1,38 @@
 import { X } from 'lucide-react'
 import { ReactNode } from 'react'
+import { VariantProps, tv } from 'tailwind-variants'
 
-interface ModalProps {
+const ModalVariants = tv({
+  base: 'rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5',
+
+  variants: {
+    variant: {
+      default: 'w-[640px]',
+      smaller: ''
+    }
+  },
+
+  defaultVariants: {
+    variant: 'default'
+  }
+})
+interface ModalProps extends VariantProps<typeof ModalVariants> {
   title: string
-  paragraph: ReactNode
   children: ReactNode
+  paragraph?: ReactNode
   closeModal: () => void
 }
 
-export function Modal({ title, paragraph, children, closeModal }: ModalProps) {
+export function Modal({
+  title,
+  children,
+  variant,
+  paragraph,
+  closeModal
+}: ModalProps) {
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
-      <div className="w-[640px] rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5">
+      <div className={ModalVariants({ variant })}>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">{title}</h2>
@@ -19,7 +40,7 @@ export function Modal({ title, paragraph, children, closeModal }: ModalProps) {
               <X className="size-5 text-zinc-400" />
             </button>
           </div>
-          <p className="text-sm text-zinc-400">{paragraph}</p>
+          {paragraph && <p className="text-sm text-zinc-400">{paragraph}</p>}
         </div>
 
         {children}
