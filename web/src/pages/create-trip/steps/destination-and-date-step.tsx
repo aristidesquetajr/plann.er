@@ -9,16 +9,19 @@ import { Modal } from '../../../components/modal'
 interface DestinationAndDateStepProps {
   isGuestsInputOpen: boolean
   changeGuestsInput: () => void
+  eventStartAndEndDates: DateRange | undefined
+  setDestination: (destination: string) => void
+  setEventStartAndEndDates: (dates: DateRange | undefined) => void
 }
 
 export function DestinationAndDateStep({
+  setDestination,
   isGuestsInputOpen,
-  changeGuestsInput
+  changeGuestsInput,
+  eventStartAndEndDates,
+  setEventStartAndEndDates
 }: DestinationAndDateStepProps) {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
-  const [eventStartAndEndDates, setEventStartAndEndDates] = useState<
-    DateRange | undefined
-  >()
 
   function changeDatePicker() {
     setIsDatePickerOpen(!isDatePickerOpen)
@@ -41,6 +44,7 @@ export function DestinationAndDateStep({
           type="text"
           disabled={isGuestsInputOpen}
           placeholder="Para onde você vai?"
+          onChange={({ target }) => setDestination(target.value)}
           className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
         />
       </div>
