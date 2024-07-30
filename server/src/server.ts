@@ -5,12 +5,13 @@ import {
 } from 'fastify-type-provider-zod'
 
 import cors from '@fastify/cors'
+import { env } from './env'
 import { routes } from './routes'
 
 const app = fastify()
 
 app.register(cors, {
-  origin: `${process.env.WEB_BASE_URL}`
+  origin: env.WEB_BASE_URL
 })
 
 app.setValidatorCompiler(validatorCompiler)
@@ -18,6 +19,4 @@ app.setSerializerCompiler(serializerCompiler)
 
 app.register(routes)
 
-app
-  .listen({ port: Number(process.env.PORT) })
-  .then(() => console.log('Server running'))
+app.listen({ port: env.PORT }).then(() => console.log('Server running'))
