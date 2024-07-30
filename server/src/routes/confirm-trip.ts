@@ -17,7 +17,7 @@ export async function confirmTrip(app: FastifyInstance) {
         })
       }
     },
-    async (request, replay) => {
+    async (request, reply) => {
       const { tripId } = request.params
 
       const trip = await prisma.trip.findUnique({
@@ -30,7 +30,7 @@ export async function confirmTrip(app: FastifyInstance) {
       }
 
       if (trip.is_confirmed) {
-        return replay.redirect(`${env.WEB_BASE_URL}/trips/${trip.id}`)
+        return reply.redirect(`${env.WEB_BASE_URL}/trips/${trip.id}`)
       }
 
       await prisma.trip.update({
@@ -70,7 +70,7 @@ export async function confirmTrip(app: FastifyInstance) {
         })
       )
 
-      return replay.redirect(`${env.WEB_BASE_URL}/trips/${trip.id}`)
+      return reply.redirect(`${env.WEB_BASE_URL}/trips/${trip.id}`)
     }
   )
 }
