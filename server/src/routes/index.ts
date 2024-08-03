@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { confirmParticipant } from './confirm-participant'
 import { confirmTrip } from './confirm-trip'
 import { createActivity } from './create-activity'
+import { createInvite } from './create-invite'
 import { createLink } from './create-link'
 import { createTrip } from './create-trip'
 import { getActivities } from './get-activities'
@@ -17,4 +18,5 @@ export async function routes(app: FastifyInstance) {
   app.register(createLink)
   app.register(getLinks)
   app.register(getParticipants)
+  app.register(createInvite)
 }
