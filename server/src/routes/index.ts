@@ -8,6 +8,8 @@ import { createTrip } from './create-trip'
 import { getActivities } from './get-activities'
 import { getLinks } from './get-links'
 import { getParticipants } from './get-participants'
+import { getTripDetails } from './get-trip-details'
+import { updateTrip } from './update-trip'
 
 export async function routes(app: FastifyInstance) {
   app.register(createTrip)
@@ -19,4 +21,6 @@ export async function routes(app: FastifyInstance) {
   app.register(getLinks)
   app.register(getParticipants)
   app.register(createInvite)
+  app.register(updateTrip)
+  app.register(getTripDetails)
 }
