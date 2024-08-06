@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsx watch --env-file .env src/server.ts",
-    "start": "node --env-file .env dist/server"
+    "start": "node -r dotenv/config dist/server"
   },
   "devDependencies": {
     "@types/node": "^20.14.12",
@@ -17,6 +17,7 @@
     "@fastify/cors": "^9.0.1",
     "@prisma/client": "5.17.0",
     "dayjs": "^1.11.12",
+    "dotenv": "^16.4.5",
     "fastify": "^4.28.1",
     "fastify-type-provider-zod": "^2.0.0",
     "nodemailer": "^6.9.14",
