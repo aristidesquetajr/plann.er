@@ -22,4 +22,6 @@ app.setErrorHandler(errorHandler)
 
 app.register(routes)
 
-app.listen({ port: env.PORT }).then(() => console.log('Server running'))
+const host = process.env.NODE_ENV !== 'production' ? `localhost` : `0.0.0.0`
+
+app.listen({ host, port: env.PORT }).then(() => console.log('Server running'))
