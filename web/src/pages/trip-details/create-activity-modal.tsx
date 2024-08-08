@@ -1,9 +1,8 @@
 import { Calendar, Tag } from 'lucide-react'
 import { FormEvent } from 'react'
-import { useParams } from 'react-router-dom'
 import { Button } from '../../components/button'
 import { Modal } from '../../components/modal'
-import { api } from '../../lib/axios'
+import { useActivity } from '../../contexts/useActivity'
 
 interface CreateActivityModalProps {
   closeCreateActivityModal: () => void
@@ -12,9 +11,9 @@ interface CreateActivityModalProps {
 export function CreateActivityModal({
   closeCreateActivityModal
 }: CreateActivityModalProps) {
-  const { tripId } = useParams()
+  const { createActivity } = useActivity()
 
-  async function createActivity(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const form = event.currentTarget
@@ -23,9 +22,12 @@ export function CreateActivityModal({
     const title = data.get('title')?.toString()
     const occurs_at = data.get('occurs_at')?.toString()
 
-    await api.post(`/trips/${tripId}/activities`, { title, occurs_at })
+    if (!title || !occurs_at) return
 
-    window.location.reload()
+    await createActivity(title, occurs_at)
+
+    form.reset()
+    closeCreateActivityModal()
   }
 
   return (
@@ -34,7 +36,7 @@ export function CreateActivityModal({
       paragraph={'Todos convidados podem visualizar as atividades'}
       closeModal={closeCreateActivityModal}
     >
-      <form onSubmit={createActivity} className="space-y-3">
+      <form onSubmit={onSubmit} className="space-y-3">
         <div className="h-14 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
           <Tag className="size-5 text-zinc-400" />
           <input

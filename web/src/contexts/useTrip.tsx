@@ -97,8 +97,4 @@ export function TripProvider({ children, isFetchTrip }: TripProviderProps) {
   )
 }
 
-export function useTrip() {
-  const context = useContext(TripContext)
-
-  return context
-}
+export const useTrip = () => useContext(TripContext)
