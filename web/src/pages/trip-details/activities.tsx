@@ -1,20 +1,10 @@
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { CircleCheck } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Activity } from '../../interfaces/activity'
-import { api } from '../../lib/axios'
+import { useActivity } from '../../contexts/useActivity'
 
 export function Activities() {
-  const { tripId } = useParams()
-  const [activities, setActivities] = useState<Activity[]>([])
-
-  useEffect(() => {
-    api
-      .get(`/trips/${tripId}/activities`)
-      .then(({ data }) => setActivities(data.activities))
-  }, [tripId])
+  const { activities } = useActivity()
 
   return (
     <div className="space-y-8">

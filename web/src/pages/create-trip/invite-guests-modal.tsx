@@ -1,21 +1,41 @@
 import { AtSign, Plus, X } from 'lucide-react'
-import { FormEvent } from 'react'
 import { Button } from '../../components/button'
 import { Modal } from '../../components/modal'
+import { useTrip } from '../../contexts/useTrip'
+import { FormEvent } from 'react'
 
 interface InviteGuestsModalProps {
-  emailsToInvite: string[]
   closeGuestsModal: () => void
-  addNewEmailToInvite: (event: FormEvent<HTMLFormElement>) => void
-  removeEmailFromInvites: (email: string) => void
 }
 
 export function InviteGuestsModal({
-  emailsToInvite,
-  closeGuestsModal,
-  addNewEmailToInvite,
-  removeEmailFromInvites
+  closeGuestsModal
 }: InviteGuestsModalProps) {
+  const { emailsToInvite, setEmailsToInvite } = useTrip()
+
+  function addNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const form = event.currentTarget
+    const data = new FormData(form)
+
+    const email = data.get('email')?.toString()
+    const hasEmailToInvite = emailsToInvite.includes(email!)
+
+    if (!email || hasEmailToInvite) return
+
+    form.reset()
+    setEmailsToInvite([...emailsToInvite, email])
+  }
+
+  function removeEmailFromInvites(emailToRemove: string) {
+    const newEmailList = emailsToInvite.filter(
+      (email) => email !== emailToRemove
+    )
+
+    setEmailsToInvite(newEmailList)
+  }
+
   return (
     <Modal
       title="Selecionar convidados"

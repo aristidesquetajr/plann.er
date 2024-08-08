@@ -1,24 +1,17 @@
 import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { Calendar, MapPin, Settings2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { Button } from '../../components/button'
-import { Trip } from '../../interfaces/trip'
-import { api } from '../../lib/axios'
+import { useTrip } from '../../contexts/useTrip'
 
 export function DestinationAndDateHeader() {
-  const { tripId } = useParams()
-  const [trip, setTrip] = useState<Trip>()
-
-  useEffect(() => {
-    api.get(`/trips/${tripId}`).then(({ data }) => setTrip(data.trip))
-  }, [tripId])
+  const { trip } = useTrip()
 
   const displayedDates =
     trip &&
-    format(trip.starts_at, "d' de 'LLL")
+    format(trip.starts_at, "d' de 'LLLL", { locale: ptBR })
       .concat(' até ')
-      .concat(format(trip.ends_at, "d' de 'LLL"))
+      .concat(format(trip.ends_at, "d' de 'LLLL", { locale: ptBR }))
 
   return (
     <div className="px-4 h-16 rounded-xl bg-zinc-900 shadow-shape flex items-center justify-between">

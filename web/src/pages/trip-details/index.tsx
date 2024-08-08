@@ -6,6 +6,9 @@ import { DestinationAndDateHeader } from './destination-and-date-header'
 import { Guests } from './guests'
 import { ImportantLinks } from './important-links'
 import { Button } from '../../components/button'
+import { ActivityProvider } from '../../contexts/useActivity'
+import { LinkProvider } from '../../contexts/useLink'
+import { ParticipantProvider } from '../../contexts/useParticipant'
 
 export function TripDetails() {
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] =
@@ -31,21 +34,29 @@ export function TripDetails() {
             </Button>
           </div>
 
-          <Activities />
+          <ActivityProvider>
+            <Activities />
+
+            {isCreateActivityModalOpen && (
+              <CreateActivityModal
+                closeCreateActivityModal={changeCreateActivityModal}
+              />
+            )}
+          </ActivityProvider>
         </div>
 
         <div className="w-80 space-y-6">
-          <ImportantLinks />
+          <LinkProvider>
+            <ImportantLinks />
+          </LinkProvider>
+
           <div className="w-full h-px bg-zinc-800" />
-          <Guests />
+
+          <ParticipantProvider>
+            <Guests />
+          </ParticipantProvider>
         </div>
       </main>
-
-      {isCreateActivityModalOpen && (
-        <CreateActivityModal
-          closeCreateActivityModal={changeCreateActivityModal}
-        />
-      )}
     </div>
   )
 }
