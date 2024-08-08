@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { Calendar, MapPin, Settings2 } from 'lucide-react'
 import { Button } from '../../components/button'
 import { useTrip } from '../../contexts/useTrip'
@@ -8,9 +9,9 @@ export function DestinationAndDateHeader() {
 
   const displayedDates =
     trip &&
-    format(trip.starts_at, "d' de 'LLL")
+    format(trip.starts_at, "d' de 'LLLL", { locale: ptBR })
       .concat(' até ')
-      .concat(format(trip.ends_at, "d' de 'LLL"))
+      .concat(format(trip.ends_at, "d' de 'LLLL", { locale: ptBR }))
 
   return (
     <div className="px-4 h-16 rounded-xl bg-zinc-900 shadow-shape flex items-center justify-between">

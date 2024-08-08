@@ -11,7 +11,6 @@ interface ConfirmTripModalProps {
 
 export function ConfirmTripModal({ closeTripModal }: ConfirmTripModalProps) {
   const navigate = useNavigate()
-
   const { setOwnerName, setOwnerEmail, createTrip } = useTrip()
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -58,14 +57,14 @@ export function ConfirmTripModal({ closeTripModal }: ConfirmTripModalProps) {
 }
 
 function Paragraph() {
+  const { destination, displayedDates } = useTrip()
+
   return (
     <>
       Para confirmar a criação de viagem para{' '}
-      <span className="font-semibold text-zinc-100">Luanda, Angola</span> nas
+      <span className="font-semibold text-zinc-100">{destination}</span> nas
       datas de{' '}
-      <span className="font-semibold text-zinc-100">
-        08 a 11 de Julho de 2024
-      </span>{' '}
+      <span className="font-semibold text-zinc-100">{displayedDates}</span>{' '}
       preencha seus dados abaixo:
     </>
   )

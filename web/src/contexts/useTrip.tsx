@@ -1,3 +1,5 @@
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import {
   ReactNode,
   createContext,
@@ -29,6 +31,7 @@ interface TripContextData {
   emailsToInvite: string[]
   setEmailsToInvite: (emailsToInvite: string[]) => void
   createTrip: () => Promise<string | undefined>
+  displayedDates: string | null
 }
 
 const TripContext = createContext<TripContextData>({} as TripContextData)
@@ -74,6 +77,17 @@ export function TripProvider({ children, isFetchTrip }: TripProviderProps) {
     return tripId
   }
 
+  const displayedDates =
+    eventStartAndEndDates &&
+    eventStartAndEndDates.from &&
+    eventStartAndEndDates.to
+      ? format(eventStartAndEndDates.from, "d' de 'LLLL", { locale: ptBR })
+          .concat(' até ')
+          .concat(
+            format(eventStartAndEndDates.to, "d' de 'LLLL", { locale: ptBR })
+          )
+      : null
+
   return (
     <TripContext.Provider
       value={{
@@ -89,7 +103,8 @@ export function TripProvider({ children, isFetchTrip }: TripProviderProps) {
         setEventStartAndEndDates,
         emailsToInvite,
         setEmailsToInvite,
-        createTrip
+        createTrip,
+        displayedDates
       }}
     >
       {children}
