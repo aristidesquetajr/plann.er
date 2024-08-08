@@ -8,6 +8,7 @@ import { ImportantLinks } from './important-links'
 import { Button } from '../../components/button'
 import { ActivityProvider } from '../../contexts/useActivity'
 import { LinkProvider } from '../../contexts/useLink'
+import { ParticipantProvider } from '../../contexts/useParticipant'
 
 export function TripDetails() {
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] =
@@ -48,8 +49,12 @@ export function TripDetails() {
           <LinkProvider>
             <ImportantLinks />
           </LinkProvider>
+
           <div className="w-full h-px bg-zinc-800" />
-          <Guests />
+
+          <ParticipantProvider>
+            <Guests />
+          </ParticipantProvider>
         </div>
       </main>
     </div>
