@@ -2,15 +2,24 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { CreateTripPage } from './pages/create-trip'
 import { TripDetails } from './pages/trip-details'
+import { TripProvider } from './contexts/useTrip'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <CreateTripPage />
+    element: (
+      <TripProvider>
+        <CreateTripPage />
+      </TripProvider>
+    )
   },
   {
     path: '/trips/:tripId',
-    element: <TripDetails />
+    element: (
+      <TripProvider isFetchTrip>
+        <TripDetails />
+      </TripProvider>
+    )
   }
 ])
 

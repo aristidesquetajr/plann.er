@@ -1,27 +1,24 @@
 import { format } from 'date-fns'
 import { ArrowRight, Calendar, MapPin, Settings2 } from 'lucide-react'
 import { useState } from 'react'
-import { DateRange, DayPicker } from 'react-day-picker'
+import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import { Button } from '../../../components/button'
 import { Modal } from '../../../components/modal'
+import { useTrip } from '../../../contexts/useTrip'
 
 interface DestinationAndDateStepProps {
   isGuestsInputOpen: boolean
   changeGuestsInput: () => void
-  eventStartAndEndDates: DateRange | undefined
-  setDestination: (destination: string) => void
-  setEventStartAndEndDates: (dates: DateRange | undefined) => void
 }
 
 export function DestinationAndDateStep({
-  setDestination,
   isGuestsInputOpen,
-  changeGuestsInput,
-  eventStartAndEndDates,
-  setEventStartAndEndDates
+  changeGuestsInput
 }: DestinationAndDateStepProps) {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+  const { setDestination, eventStartAndEndDates, setEventStartAndEndDates } =
+    useTrip()
 
   function changeDatePicker() {
     setIsDatePickerOpen(!isDatePickerOpen)

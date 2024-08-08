@@ -1,17 +1,17 @@
-import { UserRoundPlus, ArrowRight } from 'lucide-react'
+import { ArrowRight, UserRoundPlus } from 'lucide-react'
 import { Button } from '../../../components/button'
+import { useTrip } from '../../../contexts/useTrip'
 
 interface InviteGuestStepProps {
-  emailsToInvite: string[]
   changeTripModal: () => void
   changeGuestsModal: () => void
 }
 
 export function InviteGuestStep({
-  emailsToInvite,
   changeTripModal,
   changeGuestsModal
 }: InviteGuestStepProps) {
+  const { emailsToInvite } = useTrip()
   return (
     <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center shadow-shape gap-3">
       <button
