@@ -17,19 +17,19 @@ export function DestinationAndDateHeader() {
     <div className="px-4 h-16 rounded-xl bg-zinc-900 shadow-shape flex items-center justify-between">
       <div className="flex items-center gap-2">
         <MapPin className="size-5 text-zinc-400" />
-        <span className="text-zinc-100">{trip?.destination}</span>
+        <span className="text-zinc-100 truncate">{trip?.destination}</span>
       </div>
 
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-2">
           <Calendar className="size-5 text-zinc-400" />
-          <span className="text-zinc-100">{displayedDates}</span>
+          <span className="text-zinc-100 truncate max-sm:hidden">{displayedDates}</span>
         </div>
 
         <div className="w-px h-6 bg-zinc-800" />
 
         <Button variant="secondary">
-          Alterar local/data
+          <span className="max-sm:hidden">Alterar local/data</span>
           <Settings2 className="size-5" />
         </Button>
       </div>

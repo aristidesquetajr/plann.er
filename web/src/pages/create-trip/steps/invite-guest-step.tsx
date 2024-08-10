@@ -13,7 +13,7 @@ export function InviteGuestStep({
 }: InviteGuestStepProps) {
   const { emailsToInvite } = useTrip()
   return (
-    <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center shadow-shape gap-3">
+    <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center shadow-shape gap-3 max-[530px]:h-32 max-[530px]:p-4 max-[530px]:flex-col max-[530px]:items-stretch">
       <button
         type="button"
         onClick={changeGuestsModal}

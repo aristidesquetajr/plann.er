@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { VariantProps, tv } from 'tailwind-variants'
 
 const ModalVariants = tv({
-  base: 'rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5',
+  base: 'rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5 mx-2',
 
   variants: {
     variant: {
