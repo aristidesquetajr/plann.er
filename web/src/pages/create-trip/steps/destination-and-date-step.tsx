@@ -28,7 +28,7 @@ export function DestinationAndDateStep({
   }
 
   return (
-    <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center shadow-shape gap-3">
+    <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center shadow-shape gap-3 max-sm:h-48 max-sm:p-4 max-sm:flex-col max-sm:items-stretch">
       <div className="flex items-center gap-2 flex-1">
         <MapPin className="text-zinc-400 size-5" />
         <input
@@ -43,7 +43,7 @@ export function DestinationAndDateStep({
       <button
         onClick={changeDatePicker}
         disabled={isGuestsInputOpen}
-        className="flex items-center gap-2 text-left w-[240px]"
+        className="flex items-center gap-2 text-left sm:w-[240px]"
       >
         <Calendar className="text-zinc-400 size-5" />
         <span className="text-lg text-zinc-400 flex-1 truncate">
@@ -65,7 +65,7 @@ export function DestinationAndDateStep({
         </Modal>
       )}
 
-      <div className="w-px h-6 bg-zinc-800" />
+      <div className="w-px h-6 bg-zinc-800 max-sm:w-full max-sm:h-px" />
 
       <Button
         onClick={changeGuestsInput}
