@@ -16,6 +16,7 @@ interface ParticipantProviderProps {
 
 interface ParticipantContextData {
   participants: Participant[]
+  inviteGuest: (email: string) => Promise<void>
 }
 
 const ParticipantContext = createContext<ParticipantContextData>(
@@ -32,10 +33,15 @@ export function ParticipantProvider({ children }: ParticipantProviderProps) {
       .then(({ data }) => setParticipants(data.participants))
   }, [])
 
+  async function inviteGuest(email: string) {
+    await api.post(`/trips/${tripId}/invites`, { email })
+    getParticipants()
+  }
+
   useEffect(() => getParticipants(), [tripId])
 
   return (
-    <ParticipantContext.Provider value={{ participants }}>
+    <ParticipantContext.Provider value={{ participants, inviteGuest }}>
       {children}
     </ParticipantContext.Provider>
   )
