@@ -1,24 +1,22 @@
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from '../../components/button'
+import { ActivityProvider } from '../../contexts/useActivity'
+import { LinkProvider } from '../../contexts/useLink'
+import { ParticipantProvider } from '../../contexts/useParticipant'
 import { Activities } from './activities'
 import { CreateActivityModal } from './create-activity-modal'
 import { DestinationAndDateHeader } from './destination-and-date-header'
 import { Guests } from './guests'
 import { ImportantLinks } from './important-links'
-import { Button } from '../../components/button'
-import { ActivityProvider } from '../../contexts/useActivity'
-import { LinkProvider } from '../../contexts/useLink'
-import { ParticipantProvider } from '../../contexts/useParticipant'
 
 export function TripDetails() {
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] =
     useState(false)
 
-  //#region functions
   function changeCreateActivityModal() {
     setIsCreateActivityModalOpen(!isCreateActivityModalOpen)
   }
-  //#endregion
 
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">

@@ -16,6 +16,7 @@ interface LinkProviderProps {
 
 interface LinkContextData {
   links: Link[]
+  createLink: (title: string, url: string) => Promise<void>
 }
 
 const LinkContext = createContext<LinkContextData>({} as LinkContextData)
@@ -28,10 +29,17 @@ export function LinkProvider({ children }: LinkProviderProps) {
     api.get(`/trips/${tripId}/links`).then(({ data }) => setLinks(data.links))
   }, [])
 
+  async function createLink(title: string, url: string) {
+    await api.post(`/trips/${tripId}/links`, { title, url })
+    getLinks()
+  }
+
   useEffect(() => getLinks(), [tripId])
 
   return (
-    <LinkContext.Provider value={{ links }}>{children}</LinkContext.Provider>
+    <LinkContext.Provider value={{ links, createLink }}>
+      {children}
+    </LinkContext.Provider>
   )
 }
 
